@@ -1,5 +1,7 @@
 part of 'shared.dart';
 
+/// Set default size and get device dimension of this application.
+
 const double defaultMargin = 20;
 
 double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;

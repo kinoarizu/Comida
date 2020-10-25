@@ -7,6 +7,8 @@ import 'package:equatable/equatable.dart';
 part 'page_event.dart';
 part 'page_state.dart';
 
+/// Handling events and states business logic for page bloc architecture.
+
 class PageBloc extends Bloc<PageEvent, PageState> {
   PageBloc() : super(OnSplashScreen());
 

@@ -1,5 +1,8 @@
 part of 'provider.dart';
 
+/// Declaring Validation Provider
+/// Using to handle validation user authentication state data.
+
 class ValidationProvider extends ChangeNotifier {
   String _errorName;
   String _errorEmail;

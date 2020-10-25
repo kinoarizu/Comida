@@ -1,5 +1,7 @@
 part of 'page_bloc.dart';
 
+/// Declaring all events of page bloc architecture.
+
 abstract class PageEvent extends Equatable {
   const PageEvent();
 }

@@ -1,5 +1,7 @@
 part of 'shared.dart';
 
+/// Set font styling of this application.
+
 TextStyle lightBaseFont = TextStyle(
   fontFamily: 'Poppins',
   color: whiteColor,

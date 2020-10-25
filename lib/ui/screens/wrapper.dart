@@ -1,5 +1,7 @@
 part of 'screens.dart';
 
+/// Handling page routing using bloc state management architecture.
+
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

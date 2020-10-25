@@ -1,5 +1,7 @@
 part of 'page_bloc.dart';
 
+/// Declaring all states of page bloc architecture.
+
 abstract class PageState extends Equatable {
   const PageState();
 }

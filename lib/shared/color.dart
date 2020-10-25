@@ -1,5 +1,7 @@
 part of 'shared.dart';
 
+/// Set theme color of this application.
+
 const Color baseColor = Color(0xFF2A2A32);
 const Color baseDarkColor = Color(0xFF19191B);
 const Color accentColor = Color(0xFF00CB2C);
