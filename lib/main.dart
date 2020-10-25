@@ -1,0 +1,37 @@
+import 'package:comida/bloc/page_bloc.dart';
+import 'package:comida/provider/provider.dart';
+import 'package:comida/shared/shared.dart';
+import 'package:comida/ui/screens/screens.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => {
+    runApp(MyApp()),
+  });
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => PageBloc()),
+      ],
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ValidationProvider()),
+        ],
+        child: MaterialApp(
+          title: "Comida - Fast Food Market",
+          theme: appTheme,
+          debugShowCheckedModeBanner: false,
+          home: Wrapper(),
+        ),
+      ),
+    );
+  }
+}
