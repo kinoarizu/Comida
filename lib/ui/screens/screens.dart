@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:comida/bloc/page_bloc.dart';
+import 'package:comida/states/bloc/page_bloc.dart';
 import 'package:comida/model/model.dart';
-import 'package:comida/provider/provider.dart';
+import 'package:comida/states/provider/provider.dart';
 import 'package:comida/shared/shared.dart';
 import 'package:comida/ui/widgets/widgets.dart';
 import 'package:comida/utils/utils.dart';
