@@ -57,3 +57,8 @@ class OnResetPasswordScreen extends PageState {
   @override
   List<Object> get props => [];
 }
+
+class OnExploreScreen extends PageState {
+  @override
+  List<Object> get props => [];
+}

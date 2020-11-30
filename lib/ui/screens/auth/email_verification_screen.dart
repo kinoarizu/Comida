@@ -85,23 +85,39 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           SizedBox(
                             height: 32,
                           ),
-                          DarkTextField(
-                            labelText: "Verification Code",
-                            hintText: "Enter Your Verification Code",
+                          PinCodeTextField(
+                            appContext: context,
+                            length: 4, 
                             controller: verificationCodeController,
-                            errorValidation: validation.errorVerificationCode,
+                            backgroundColor: Colors.transparent,
                             keyboardType: TextInputType.number,
-                            inputFormatter: MaskTextInputFormatter(
-                              mask: '######',
-                              filter: { "#": RegExp(r'[0-9]') },
+                            textStyle: regularBaseFont.copyWith(
+                              fontSize: 20,
+                              color: whiteColor,
                             ),
-                            onChanged: (text) {
-                              validation.changeVerificationCode(text);
+                            pinTheme: PinTheme(
+                              shape: PinCodeFieldShape.box,
+                              fieldWidth: 55,
+                              fieldHeight: 60,
+                              inactiveColor: borderColor,
+                              selectedColor: whiteColor,
+                              activeColor: accentColor,
+                              borderRadius: BorderRadius.circular(4),
+                              borderWidth: 2,
+                            ),
+                            onChanged: (value) {
+                              validation.changeVerificationCode(value);
+                            },
+                            onCompleted: (value) {
+                              setState(() {
+                                isClicked = true;
+                              });
+                              onEmailVerificationPressed(context);                              
                             },
                           ),
                           if (isClicked) Padding(
                             padding: EdgeInsets.only(
-                              top: 32,
+                              top: 20,
                               bottom: 79,
                             ),
                             child: SpinKitThreeBounce(
@@ -113,7 +129,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                             height: 45,
                             color: (validation.errorVerificationCode == "") ? accentColor : greyColor,
                             margin: EdgeInsets.only(
-                              top: 32,
+                              top: 20,
                               bottom: 79,
                             ),
                             child: Icon(
@@ -142,6 +158,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   }
 
   void onEmailVerificationPressed(BuildContext context) {
-
+    context.bloc<PageBloc>().add(GoToExploreScreen());
   }
 }

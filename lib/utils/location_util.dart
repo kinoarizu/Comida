@@ -1,6 +1,6 @@
 part of 'utils.dart';
 
-/// Declaring utility function for location features.
+/// Manage utility function for location features.
 
 class LocationUtil {
   static Location _location = Location();

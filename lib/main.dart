@@ -5,12 +5,15 @@ import 'package:comida/ui/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
 /// Calling run app method when app launched.
 /// Set force app orientation into potrait up.
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) => {
     runApp(MyApp()),
   });
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => ValidationProvider()),
         ],
-        child: MaterialApp(
+        child: GetMaterialApp(
           title: "Comida - Fast Food Market",
           theme: appTheme,
           debugShowCheckedModeBanner: false,

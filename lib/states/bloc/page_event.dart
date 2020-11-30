@@ -57,3 +57,8 @@ class GoToResetPasswordScreen extends PageEvent {
   @override
   List<Object> get props => [];
 }
+
+class GoToExploreScreen extends PageEvent {
+  @override
+  List<Object> get props => [];
+}

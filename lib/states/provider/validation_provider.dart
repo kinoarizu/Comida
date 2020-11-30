@@ -95,8 +95,8 @@ class ValidationProvider extends ChangeNotifier {
     if (value.length == 0) {
       _errorVerificationCode = "Code Must Be Filled";
     }
-    else if (value.length != 6) {
-      _errorVerificationCode = "Code Must Have 6 Characters";
+    else if (value.length != 4) {
+      _errorVerificationCode = "Code Must Have 4 Characters";
     }
     else {
       _errorVerificationCode = "";

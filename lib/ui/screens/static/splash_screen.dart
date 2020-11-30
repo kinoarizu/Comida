@@ -9,10 +9,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() { 
     super.initState();
-    splashToNextScreen();
+    _splashToNextScreen();
   }
 
-  splashToNextScreen() async {
+  Future<Timer> _splashToNextScreen() async {
     bool isGPSEnabled = await LocationUtil.isGPSEnabled();
     return Timer(Duration(seconds: 5), () {
       if (!isGPSEnabled) {

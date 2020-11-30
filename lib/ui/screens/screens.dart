@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:comida/network/repositories/repositories.dart';
 import 'package:comida/states/bloc/page_bloc.dart';
 import 'package:comida/model/model.dart';
 import 'package:comida/states/provider/provider.dart';
 import 'package:comida/shared/shared.dart';
 import 'package:comida/ui/widgets/widgets.dart';
 import 'package:comida/utils/utils.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,3 +28,4 @@ part 'auth/number_address_screen.dart';
 part 'auth/email_verification_screen.dart';
 part 'auth/check_email_screen.dart';
 part 'auth/reset_password_screen.dart';
+part 'food/explore_screen.dart';

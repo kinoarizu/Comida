@@ -4,5 +4,5 @@ import 'package:flutter/material.dart';
 part 'color.dart';
 part 'font.dart';
 part 'size.dart';
-part 'key.dart';
+part 'value.dart';
 part 'theme.dart';

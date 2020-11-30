@@ -32,6 +32,9 @@ class Wrapper extends StatelessWidget {
         : (pageState is OnResetPasswordScreen)
         ? ResetPasswordScreen()
 
+        : (pageState is OnExploreScreen)
+        ? ExploreScreen()
+
         : Container()
         
     );

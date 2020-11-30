@@ -135,7 +135,16 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ],
                         ),
-                        BaseButton(
+                        if (isLogining) Padding(
+                          padding: EdgeInsets.only(
+                            top: 32,
+                            bottom: 16,
+                          ),
+                          child: SpinKitThreeBounce(
+                            color: whiteColor,
+                            size: 45,
+                          ),
+                        ) else  BaseButton(
                           width: 150,
                           height: 45,
                           color: (isValidEmail && isValidPassword) ? accentColor : greyColor,
@@ -149,7 +158,16 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: whiteColor,
                           ),
                           onPressed: (isValidEmail && isValidPassword) ? () {
-                            onSignInPressed();
+                            setState(() {
+                              isLogining = true;
+                            });
+                            onSignInPressed(
+                              context,
+                              auth: Auth(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              ),
+                            );
                           } : null,
                         ),
                         Text(
@@ -260,7 +278,35 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
   
-  void onSignInPressed() async {
-    /// On Button Pressed
+  void onSignInPressed(BuildContext context, {Auth auth}) async {
+    ResponseUtil response = await AuthRepository.signIn(auth);
+
+    if (response.statusCode == 200) {
+      context.bloc<PageBloc>().add(GoToExploreScreen());
+    } else {
+      setState(() {
+        isLogining = false;
+      });
+
+      Flushbar(
+        duration: Duration(milliseconds: 2500),
+        flushbarPosition: FlushbarPosition.TOP,
+        backgroundColor: Color(0xFFD9435E),
+        margin: EdgeInsets.all(10),
+        borderRadius: 4,
+        padding: EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 10,
+        ),
+        messageText: Text(
+          "Your email or password is wrong!",
+          style: regularBaseFont,
+        ),
+        icon: Icon(
+          Icons.error_outline,
+          color: whiteColor,
+        ),
+      ).show(context);
+    }
   }
 }
