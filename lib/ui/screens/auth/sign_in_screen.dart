@@ -123,6 +123,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             GestureDetector(
                               onTap: () {
                                 context.bloc<PageBloc>().add(GoToCheckEmailScreen());
+                                validation.resetChange();
                               },
                               child: Text(
                                 "Reset",
@@ -144,7 +145,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             color: whiteColor,
                             size: 45,
                           ),
-                        ) else  BaseButton(
+                        ) else BaseButton(
                           width: 150,
                           height: 45,
                           color: (isValidEmail && isValidPassword) ? accentColor : greyColor,
@@ -283,30 +284,18 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (response.statusCode == 200) {
       context.bloc<PageBloc>().add(GoToExploreScreen());
+      Provider.of<ValidationProvider>(context, listen: false).resetChange();
     } else {
       setState(() {
         isLogining = false;
       });
 
-      Flushbar(
-        duration: Duration(milliseconds: 2500),
-        flushbarPosition: FlushbarPosition.TOP,
-        backgroundColor: Color(0xFFD9435E),
-        margin: EdgeInsets.all(10),
-        borderRadius: 4,
-        padding: EdgeInsets.symmetric(
-          horizontal: 18,
-          vertical: 10,
-        ),
-        messageText: Text(
-          "Your email or password is wrong!",
-          style: regularBaseFont,
-        ),
-        icon: Icon(
-          Icons.error_outline,
-          color: whiteColor,
-        ),
-      ).show(context);
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Your email or password is wrong!",
+      );
     }
   }
 }

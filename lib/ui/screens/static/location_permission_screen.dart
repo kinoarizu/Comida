@@ -137,7 +137,11 @@ class _LocationPermissionScreenState extends State<LocationPermissionScreen> {
     bool isGranted = await LocationUtil.enableGPS();
 
     if (isGranted) {
-      context.bloc<PageBloc>().add(GoToSignInScreen());
+      if (StorageUtil.hasStorage('token')) {
+        context.bloc<PageBloc>().add(GoToExploreScreen());
+      } else {
+        context.bloc<PageBloc>().add(GoToSignInScreen());
+      }
     } else {
       setState(() {
         isAllowClicked = false;

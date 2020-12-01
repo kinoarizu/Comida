@@ -1,4 +1,5 @@
 import 'package:comida/states/bloc/page_bloc.dart';
+import 'package:comida/states/bloc/user_bloc.dart';
 import 'package:comida/states/provider/provider.dart';
 import 'package:comida/shared/shared.dart';
 import 'package:comida/ui/screens/screens.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => PageBloc()),
+        BlocProvider(create: (_) => UserBloc()),
       ],
       child: MultiProvider(
         providers: [

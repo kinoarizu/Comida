@@ -117,7 +117,11 @@ class _CheckEmailScreenState extends State<CheckEmailScreen> {
                               setState(() {
                                 isClicked = true;
                               });
-                              onCheckEmailPressed(context);
+                              onCheckEmailPressed(
+                                context,
+                                email: emailController.text,
+                                validation: validation,
+                              );
                             } : null,
                           ),
                         ],
@@ -133,8 +137,33 @@ class _CheckEmailScreenState extends State<CheckEmailScreen> {
     );
   }
 
-  void onCheckEmailPressed(BuildContext context) {
-    context.bloc<PageBloc>().add(GoToResetPasswordScreen());
-    Provider.of<ValidationProvider>(context, listen: false).resetChange();
+  void onCheckEmailPressed(BuildContext context, {String email, ValidationProvider validation}) async {
+    ResponseUtil response = await AuthRepository.sendReset(email);
+
+    if (response.statusCode == 200) {
+      setState(() {
+        emailController.text = '';
+      });
+
+      validation.resetChange();
+
+      showValidationBar(
+        context,
+        color: Color(0xFF1ABC9C),
+        icon: Icons.check_circle_outline,
+        message: "We have sent reset password link, please check your email inbox!",
+      );
+    } else {
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Your email is not registered!",
+      );
+    }
+    
+    setState(() {
+      isClicked = false;
+    });
   }
 }

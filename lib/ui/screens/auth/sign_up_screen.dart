@@ -17,6 +17,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool isHidePassword = false;
   bool isHidePasswordConfirmation = false;
+  bool isClicked = false;
 
   @override
   void initState() {
@@ -194,7 +195,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                           ),
-                          BaseButton(
+                          if (isClicked) Padding(
+                            padding: EdgeInsets.only(
+                              top: 32,
+                              bottom: 16,
+                            ),
+                            child: SpinKitThreeBounce(
+                              color: whiteColor,
+                              size: 45,
+                            ),
+                          ) else BaseButton(
                             width: 150,
                             height: 45,
                             color: (validation.isAllValidate()) ? accentColor : greyColor,
@@ -208,6 +218,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: whiteColor,
                             ),
                             onPressed: (validation.isAllValidate()) ? () {
+                              setState(() {
+                                isClicked = true;
+                              });
                               onSignUpPressed(context);
                             } : null,
                           ),
@@ -253,12 +266,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void onSignUpPressed(BuildContext context) {
+  void onSignUpPressed(BuildContext context) async {
     widget.auth.name = nameController.text;
     widget.auth.email = emailController.text;
     widget.auth.password = passwordController.text;
     widget.auth.confirmPassword = confirmationController.text;
 
-    context.bloc<PageBloc>().add(GoToNumberAddressScreen(widget.auth));
+    ResponseUtil response = await AuthRepository.signUp(
+      Auth(
+        name: widget.auth.name,
+        email: widget.auth.email,
+        password: widget.auth.password,
+        confirmPassword: widget.auth.confirmPassword,
+      ),
+    );
+
+    if (response.error['email'] == null) {
+      context.bloc<PageBloc>().add(GoToNumberAddressScreen(widget.auth));
+    } else {
+      setState(() {
+        isClicked = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Your email address has been used!",
+      );
+    }
   }
 }
