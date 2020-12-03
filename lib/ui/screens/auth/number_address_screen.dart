@@ -257,44 +257,30 @@ class _NumberAddressScreenState extends State<NumberAddressScreen> {
   }
 
   void onNumberAddressPressed(BuildContext context) async {
-    widget.auth.phoneNumber = countryCodeController.text + phoneController.text.replaceAll('-', '');
+    widget.auth.phoneNumber = phoneController.text.replaceAll('-', '');
     widget.auth.address = addressController.text;
 
     ResponseUtil response = await AuthRepository.signUp(
       Auth(
-        name: widget.auth.name,
-        email: widget.auth.email,
-        password: widget.auth.password,
-        confirmPassword: widget.auth.confirmPassword,
-        phoneNumber: widget.auth.phoneNumber,
+        phoneNumber: countryCodeController.text + widget.auth.phoneNumber,
         address: widget.auth.address,
       ),
     );
 
-    if (response.statusCode == 200) {
-      User user = response.data;
-      widget.auth.id = user.id;
+    if (response.error['phone_number'] == null) {
+      await AuthRepository.verification(widget.auth.name, widget.auth.email);
       context.bloc<PageBloc>().add(GoToEmailVerificationScreen(widget.auth));
     } else {
       setState(() {
         isClicked = false;
       });
 
-      if (response.error['phone_number'] != null) {
-        showValidationBar(
-          context,
-          color: Color(0xFFD9435E),
-          icon: Icons.error_outline,
-          message: "Your phone number has been used!",
-        );
-      } else if (response.error['email'] != null) {
-        showValidationBar(
-          context,
-          color: Color(0xFFD9435E),
-          icon: Icons.error_outline,
-          message: "Your email address has been used!",
-        );
-      }
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Your phone number has been used!",
+      );
     }
   }
 }

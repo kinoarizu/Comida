@@ -11,6 +11,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   bool isHidePassword = false;
   bool isLogining = false;
+  bool isGoogleClicked = false;
+  bool isFacebookClicked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -181,11 +183,24 @@ class _SignInScreenState extends State<SignInScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            BaseButton(
+                            if (isGoogleClicked) SizedBox(
+                              width: 150,
+                              child: Center(
+                                child: SpinKitThreeBounce(
+                                  color: whiteColor,
+                                  size: 45,
+                                ),
+                              ),
+                            ) else BaseButton(
                               width: 150,
                               height: 45,
                               color: whiteColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  isGoogleClicked = true;
+                                });
+                                onGoogleSignInPressed();
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -210,11 +225,24 @@ class _SignInScreenState extends State<SignInScreen> {
                             SizedBox(
                               width: 12,
                             ),
-                            BaseButton(
+                            if (isFacebookClicked) SizedBox(
+                              width: 150,
+                              child: Center(
+                                child: SpinKitThreeBounce(
+                                  color: whiteColor,
+                                  size: 45,
+                                ),
+                              ),
+                            ) else BaseButton(
                               width: 150,
                               height: 45,
                               color: blueColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  isFacebookClicked = true;
+                                });
+                                onFacebookSignInPressed();
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -285,6 +313,17 @@ class _SignInScreenState extends State<SignInScreen> {
     if (response.statusCode == 200) {
       context.bloc<PageBloc>().add(GoToExploreScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
+    } else if (response.statusCode == 450) {
+      setState(() {
+        isLogining = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Your email is not verified!",
+      );
     } else {
       setState(() {
         isLogining = false;
@@ -295,6 +334,46 @@ class _SignInScreenState extends State<SignInScreen> {
         color: Color(0xFFD9435E),
         icon: Icons.error_outline,
         message: "Your email or password is wrong!",
+      );
+    }
+  }
+
+  void onGoogleSignInPressed() async {
+    ResponseUtil response = await SocialAuthService.signInGoogle();
+
+    if (response.data != null) {
+      context.bloc<PageBloc>().add(GoToExploreScreen());
+      Provider.of<ValidationProvider>(context, listen: false).resetChange();
+    } else {
+      setState(() {
+        isGoogleClicked = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Please select your google account!",
+      );
+    }
+  }
+
+  void onFacebookSignInPressed() async {
+    ResponseUtil response = await SocialAuthService.signInFacebook();
+
+    if (response.statusCode == 200) {
+      context.bloc<PageBloc>().add(GoToExploreScreen());
+      Provider.of<ValidationProvider>(context, listen: false).resetChange();
+    } else {
+      setState(() {
+        isFacebookClicked = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "You have cancelled facebook login!",
       );
     }
   }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>834156058005-qp0vbvtg5h2h2fb92jlidlj30qhe0hdm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.834156058005-qp0vbvtg5h2h2fb92jlidlj30qhe0hdm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBVe2B76v3pyVoSgQH5jmFj-rbVFU67m7k</string>
+	<key>GCM_SENDER_ID</key>
+	<string>834156058005</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.abuzaio.comida</string>
+	<key>PROJECT_ID</key>
+	<string>comida-bdc17</string>
+	<key>STORAGE_BUCKET</key>
+	<string>comida-bdc17.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:834156058005:ios:80c1d2d8028b6c6c0d929c</string>
+	<key>DATABASE_URL</key>
+	<string>https://comida-bdc17.firebaseio.com</string>
+</dict>
+</plist>

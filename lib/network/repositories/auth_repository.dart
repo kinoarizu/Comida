@@ -38,7 +38,7 @@ class AuthRepository {
     );
   }
 
-  static Future<ResponseUtil> signUp(Auth auth) async {
+  static Future<ResponseUtil> signUp(Auth auth, {String code}) async {
     String apiURL = apiBaseURL + '/auth/register';
 
     FormData authData = FormData.fromMap({
@@ -48,40 +48,6 @@ class AuthRepository {
       'password_confirmation': auth.confirmPassword,
       'phone_number': auth.phoneNumber,
       'address': auth.address,
-    });
-
-    final response = await Dio().post(
-      apiURL,
-      data: authData,
-      options: Options(
-        followRedirects: false, 
-        validateStatus: (status) { return status <= 500; },
-      ),
-    );
-
-    final meta = response.data['meta'];
-    final data = response.data['data'];
-
-    if (response.statusCode == 200) {
-      return ResponseUtil.resultResponse(
-        message: meta['message'],
-        data: User.fromJson(data['user']),
-        statusCode: response.statusCode,
-      );
-    }
-
-    return ResponseUtil.resultResponse(
-      message: meta['message'],
-      error: data['error'],
-      statusCode: response.statusCode,
-    );
-  }
-
-  static Future<ResponseUtil> verify(int userID, String code) async {
-    String apiURL = apiBaseURL + '/auth/verify';
-
-    FormData authData = FormData.fromMap({
-      'user_id': userID,
       'code': code,
     });
 
@@ -103,6 +69,41 @@ class AuthRepository {
       return ResponseUtil.resultResponse(
         message: meta['message'],
         data: User.fromJson(data['user']),
+        statusCode: response.statusCode,
+      );
+    }
+
+    return ResponseUtil.resultResponse(
+      message: meta['message'],
+      error: data['error'],
+      statusCode: response.statusCode,
+    );
+  }
+
+  static Future<ResponseUtil> verification(String name, String email) async {
+    String apiURL = apiBaseURL + '/auth/verification';
+
+    FormData authData = FormData.fromMap({
+      'name': name,
+      'email': email,
+    });
+
+    final response = await Dio().post(
+      apiURL,
+      data: authData,
+      options: Options(
+        followRedirects: false, 
+        validateStatus: (status) { return status <= 500; },
+      ),
+    );
+
+    final meta = response.data['meta'];
+    final data = response.data['data'];
+
+    if (response.statusCode == 200) {
+      return ResponseUtil.resultResponse(
+        message: meta['message'],
+        data: data,
         statusCode: response.statusCode,
       );
     }

@@ -37,6 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           context.bloc<PageBloc>().add(GoToSignInScreen());
           validation.resetChange(); 
           validation.resetChangeNumberAddress();
+          validation.resetVerificationCode();
           return;
         },
         child: Scaffold(
@@ -71,6 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     context.bloc<PageBloc>().add(GoToSignInScreen());
                                     validation.resetChange(); 
                                     validation.resetChangeNumberAddress();
+                                    validation.resetVerificationCode();     
                                   },
                                   child: Icon(
                                     LineAwesomeIcons.angle_left,
@@ -238,6 +240,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onTap: () {
                                   context.bloc<PageBloc>().add(GoToSignInScreen());
                                   validation.resetChange(); 
+                                  validation.resetChangeNumberAddress();
+                                  validation.resetVerificationCode();
                                 },
                                 child: Text(
                                   "Sign In",

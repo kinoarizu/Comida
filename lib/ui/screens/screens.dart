@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:comida/network/repositories/repositories.dart';
+import 'package:comida/network/services/services.dart';
 import 'package:comida/states/bloc/page_bloc.dart';
 import 'package:comida/model/model.dart';
 import 'package:comida/states/bloc/user_bloc.dart';

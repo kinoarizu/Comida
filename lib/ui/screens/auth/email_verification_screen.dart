@@ -158,13 +158,34 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   }
 
   void onEmailVerificationPressed(BuildContext context) async {
-    ResponseUtil response = await AuthRepository.verify(widget.auth.id, verificationCodeController.text);
+    ResponseUtil response = await AuthRepository.signUp(
+      Auth(
+        name: widget.auth.name,
+        email: widget.auth.email,
+        password: widget.auth.password,
+        confirmPassword: widget.auth.confirmPassword,
+        phoneNumber: widget.auth.phoneNumber,
+        address: widget.auth.address,
+      ),
+      code: verificationCodeController.text,
+    );
 
     if (response.statusCode == 200) {
       context.bloc<PageBloc>().add(GoToExploreScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
       Provider.of<ValidationProvider>(context, listen: false).resetChangeNumberAddress();
       Provider.of<ValidationProvider>(context, listen: false).resetVerificationCode();
+    } else if (response.statusCode == 422) {
+      setState(() {
+        isClicked = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Your verfication code has expired!",
+      );
     } else {
       setState(() {
         isClicked = false;
@@ -174,7 +195,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         context,
         color: Color(0xFFD9435E),
         icon: Icons.error_outline,
-        message: "Your verfication code has expired or not valid!",
+        message: "Your verification code is wrong!",
       );
     }
   }

@@ -26,9 +26,7 @@ class ExploreScreen extends StatelessWidget {
                         "Sign Out",
                       ),
                       onPressed: () async {
-                        await AuthRepository.signOut();
-                        context.bloc<UserBloc>().add(SignOut());
-                        context.bloc<PageBloc>().add(GoToSignInScreen());
+                        onSignOutPressed(context);
                       },
                     ),
                   ],
@@ -44,5 +42,20 @@ class ExploreScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onSignOutPressed(BuildContext context) async {
+    if (StorageUtil.readStorage('status') == 'google') {
+      await SocialAuthService.signOutGoogle();
+    }
+    else if (StorageUtil.readStorage('status') == 'facebook') {
+      await SocialAuthService.signOutFacebook();
+    }
+    else {
+      await AuthRepository.signOut();
+    }
+
+    context.bloc<UserBloc>().add(SignOut());
+    context.bloc<PageBloc>().add(GoToSignInScreen());
   }
 }
