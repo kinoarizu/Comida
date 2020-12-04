@@ -257,7 +257,7 @@ class _NumberAddressScreenState extends State<NumberAddressScreen> {
   }
 
   void onNumberAddressPressed(BuildContext context) async {
-    widget.auth.phoneNumber = phoneController.text.replaceAll('-', '');
+    widget.auth.phoneNumber = phoneController.text;
     widget.auth.address = addressController.text;
 
     ResponseUtil response = await AuthRepository.signUp(

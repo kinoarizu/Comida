@@ -14,10 +14,24 @@ class SocialAuthService {
         statusCode: 400,
       );
     }
+
+    final ResponseUtil response = await AuthRepository.social(
+      model.Auth(
+        name: googleSignInAccount.displayName,
+        email: googleSignInAccount.email,
+      ),
+    );
+
+    if (response.statusCode != 200) {
+      return ResponseUtil.resultResponse(
+        data: null,
+        statusCode: 422,
+      );
+    }
     
     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
 
-    final AuthCredential credential = GoogleAuthProvider.credential(
+    final OAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
@@ -53,6 +67,22 @@ class SocialAuthService {
       final AccessToken accessToken = await FacebookAuth.instance.login(
         loginBehavior: LoginBehavior.NATIVE_WITH_FALLBACK,
       );
+
+      final Map<String, dynamic> facebookData = await FacebookAuth.instance.getUserData();
+      
+      final ResponseUtil response = await AuthRepository.social(
+        model.Auth(
+          name: facebookData['name'],
+          email: facebookData['email'],
+        ),
+      );
+
+      if (response.statusCode != 200) {
+        return ResponseUtil.resultResponse(
+          data: null,
+          statusCode: 422,
+        );
+      }
       
       final OAuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
 

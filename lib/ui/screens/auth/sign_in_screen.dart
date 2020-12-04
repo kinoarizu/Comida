@@ -341,9 +341,20 @@ class _SignInScreenState extends State<SignInScreen> {
   void onGoogleSignInPressed() async {
     ResponseUtil response = await SocialAuthService.signInGoogle();
 
-    if (response.data != null) {
+    if (response.statusCode == 200) {
       context.bloc<PageBloc>().add(GoToExploreScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
+    } else if (response.statusCode == 422) {
+      setState(() {
+        isGoogleClicked = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: 'Email Account Has Been Registered',
+      );
     } else {
       setState(() {
         isGoogleClicked = false;
@@ -364,6 +375,17 @@ class _SignInScreenState extends State<SignInScreen> {
     if (response.statusCode == 200) {
       context.bloc<PageBloc>().add(GoToExploreScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
+    } else if (response.statusCode == 422) {
+      setState(() {
+        isGoogleClicked = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: 'Email Account Has Been Registered',
+      );
     } else {
       setState(() {
         isFacebookClicked = false;

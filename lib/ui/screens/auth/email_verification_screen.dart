@@ -180,6 +180,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         isClicked = false;
       });
 
+      Provider.of<ValidationProvider>(context, listen: false).resetVerificationCode();
+
       showValidationBar(
         context,
         color: Color(0xFFD9435E),
@@ -189,7 +191,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     } else {
       setState(() {
         isClicked = false;
+        verificationCodeController.text = "";
       });
+
+      Provider.of<ValidationProvider>(context, listen: false).resetVerificationCode();
 
       showValidationBar(
         context,

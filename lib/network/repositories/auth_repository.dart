@@ -174,4 +174,39 @@ class AuthRepository {
       statusCode: response.statusCode,
     );
   }
+
+  static Future<ResponseUtil> social(Auth auth) async {
+    String apiURL = apiBaseURL + '/auth/social';
+
+    FormData authData = FormData.fromMap({
+      'name': auth.name,
+      'email': auth.email,
+    });
+
+    final response = await Dio().post(
+      apiURL,
+      data: authData,
+      options: Options(
+        followRedirects: false, 
+        validateStatus: (status) { return status <= 500; },
+      ),
+    );
+
+    final meta = response.data['meta'];
+    final data = response.data['data'];
+
+    if (response.statusCode == 200) {
+      return ResponseUtil.resultResponse(
+        message: meta['message'],
+        data: data['access_token'],
+        statusCode: response.statusCode,
+      );
+    }
+
+    return ResponseUtil.resultResponse(
+      message: meta['message'],
+      error: data['error'],
+      statusCode: response.statusCode,
+    );
+  }
 } 
