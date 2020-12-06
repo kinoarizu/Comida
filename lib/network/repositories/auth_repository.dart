@@ -175,6 +175,34 @@ class AuthRepository {
     );
   }
 
+  static Future<ResponseUtil> updatePassword(Auth auth) async {
+    String apiURL = apiBaseURL + '/auth/password/reset?_method=PUT';
+
+    User fetchedUser = await fetchUser();
+
+    FormData authData = FormData.fromMap({
+      'id': fetchedUser.id,
+      'password': auth.password,
+      'password_confirmation': auth.confirmPassword,
+    });
+
+    final response = await Dio().post(
+      apiURL,
+      data: authData,
+      options: Options(
+        followRedirects: false, 
+        validateStatus: (status) { return status <= 500; },
+      ),
+    );
+
+    final meta = response.data['meta'];
+
+    return ResponseUtil.resultResponse(
+      message: meta['message'],
+      statusCode: response.statusCode,
+    );
+  }
+
   static Future<ResponseUtil> social(Auth auth) async {
     String apiURL = apiBaseURL + '/auth/social';
 
@@ -208,5 +236,24 @@ class AuthRepository {
       error: data['error'],
       statusCode: response.statusCode,
     );
+  }
+
+  static Future<User> fetchUser() async {
+    String apiURL = apiBaseURL + '/user';
+
+    final String resetToken = StorageUtil.readStorage('reset_token');
+
+    final response = await Dio().get(
+      apiURL,
+      options: Options(
+        followRedirects: false, 
+        validateStatus: (status) { return status <= 500; },
+        headers: {
+          'Authorization': 'Bearer $resetToken',
+        },
+      ),
+    );
+    
+    return User.fromJson(response.data['data']);
   }
 } 

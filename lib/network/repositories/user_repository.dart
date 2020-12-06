@@ -10,7 +10,7 @@ class UserRepository {
       apiURL,
       options: Options(
         followRedirects: false, 
-        validateStatus: (status) { return status < 500; },
+        validateStatus: (status) { return status <= 500; },
         headers: {
           'Authorization': 'Bearer $token',
         },

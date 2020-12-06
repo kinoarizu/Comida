@@ -29,6 +29,7 @@ dependencies:
   equatable: ^1.2.5
   firebase_auth: ^0.18.3+1
   firebase_core: ^0.5.2+1
+  firebase_dynamic_links: ^0.6.3
   flushbar: ^1.10.4
   flutter_bloc: ^6.0.6
   flutter_facebook_auth: ^1.0.2+1

@@ -20,6 +20,7 @@ class _NumberAddressScreenState extends State<NumberAddressScreen> {
   void initState() {
     super.initState();
 
+    countryCodeController.text = widget.auth.countryCode;
     phoneController.text = widget.auth.phoneNumber;
     addressController.text = widget.auth.address;
   }
@@ -131,7 +132,7 @@ class _NumberAddressScreenState extends State<NumberAddressScreen> {
                                       controller: countryCodeController,
                                       keyboardType: TextInputType.number,
                                       inputFormatter: MaskTextInputFormatter(
-                                        mask: '+##',
+                                        mask: '+###',
                                         filter: { "#": RegExp(r'[0-9]') }
                                       ),
                                     ),
@@ -257,6 +258,7 @@ class _NumberAddressScreenState extends State<NumberAddressScreen> {
   }
 
   void onNumberAddressPressed(BuildContext context) async {
+    widget.auth.countryCode = countryCodeController.text;
     widget.auth.phoneNumber = phoneController.text;
     widget.auth.address = addressController.text;
 

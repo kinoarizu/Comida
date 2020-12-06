@@ -9,6 +9,7 @@ class Auth {
   String email;
   String password;
   String confirmPassword;
+  String countryCode;
   String phoneNumber;
   String address;
 
@@ -18,6 +19,7 @@ class Auth {
     this.email,
     this.password,
     this.confirmPassword,
+    this.countryCode,
     this.phoneNumber,
     this.address,
   });

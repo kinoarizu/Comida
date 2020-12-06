@@ -15,6 +15,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -170,7 +172,37 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     );
   }
 
-  void onResetPasswordPressed(BuildContext context) {
+  void onResetPasswordPressed(BuildContext context) async {
+    ResponseUtil response = await AuthRepository.updatePassword(
+      Auth(
+        password: passwordController.text,
+        confirmPassword: confirmationController.text,
+      ),
+    );
 
+    if (response.statusCode == 200) {
+      context.bloc<PageBloc>().add(GoToSignInScreen());
+      Provider.of<ValidationProvider>(context, listen: false).resetChange();
+
+      StorageUtil.removeStorage('reset_token');
+      
+      showValidationBar(
+        context,
+        color: Color(0xFF1ABC9C),
+        icon: Icons.check_circle_outline,
+        message: "Your password has been changed!",
+      );
+    } else {
+      setState(() {
+        isClicked = false;
+      });
+
+      showValidationBar(
+        context,
+        color: Color(0xFFD9435E),
+        icon: Icons.error_outline,
+        message: "Failed change your password!",
+      );
+    }
   }
 }

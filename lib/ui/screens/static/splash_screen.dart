@@ -13,8 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<Timer> _splashToNextScreen() async {
-    bool isGPSEnabled = await LocationUtil.isGPSEnabled();
-
+    final bool isGPSEnabled = await LocationUtil.isGPSEnabled();
     return Timer(Duration(seconds: 5), () {
       if (!isGPSEnabled) {
         context.bloc<PageBloc>().add(GoToLocationPermissionScreen());
