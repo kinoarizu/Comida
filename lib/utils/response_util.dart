@@ -1,5 +1,3 @@
-part of 'utils.dart';
-
 /// Manage utility function for response repository api.
 
 class ResponseUtil {

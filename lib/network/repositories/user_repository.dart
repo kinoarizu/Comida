@@ -1,4 +1,7 @@
-part of 'repositories.dart';
+import 'package:comida/model/user.dart';
+import 'package:comida/shared/value.dart';
+import 'package:comida/utils/storage_util.dart';
+import 'package:dio/dio.dart';
 
 class UserRepository {
   static Future<User> getUser() async {

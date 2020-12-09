@@ -1,4 +1,4 @@
-part of 'utils.dart';
+import 'package:location/location.dart';
 
 /// Manage utility function for location features.
 

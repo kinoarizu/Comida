@@ -1,4 +1,4 @@
-part of 'shared.dart';
+import 'package:flutter/material.dart';
 
 /// Set theme color of this application.
 

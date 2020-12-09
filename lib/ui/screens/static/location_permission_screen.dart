@@ -1,4 +1,13 @@
-part of 'package:comida/ui/screens/screens.dart';
+import 'package:comida/shared/color.dart';
+import 'package:comida/shared/font.dart';
+import 'package:comida/shared/size.dart';
+import 'package:comida/states/bloc/page_bloc.dart';
+import 'package:comida/utils/location_util.dart';
+import 'package:comida/utils/storage_util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LocationPermissionScreen extends StatefulWidget {
   @override
@@ -138,7 +147,7 @@ class _LocationPermissionScreenState extends State<LocationPermissionScreen> {
 
     if (isGranted) {
       if (StorageUtil.hasStorage('token')) {
-        context.bloc<PageBloc>().add(GoToExploreScreen());
+        context.bloc<PageBloc>().add(GoToMainScreen());
       } else {
         context.bloc<PageBloc>().add(GoToSignInScreen());
       }

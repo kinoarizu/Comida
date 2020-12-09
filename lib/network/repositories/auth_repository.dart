@@ -1,4 +1,9 @@
-part of 'repositories.dart';
+import 'package:comida/model/auth.dart';
+import 'package:comida/model/user.dart';
+import 'package:comida/shared/value.dart';
+import 'package:comida/utils/response_util.dart';
+import 'package:comida/utils/storage_util.dart';
+import 'package:dio/dio.dart';
 
 class AuthRepository {
   static Future<ResponseUtil> signIn(Auth auth) async {

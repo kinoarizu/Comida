@@ -1,4 +1,4 @@
-part of 'utils.dart';
+import 'package:get_storage/get_storage.dart';
 
 /// Manage utility function for data local storage.
 

@@ -1,7 +1,5 @@
-part of 'provider.dart';
-
-/// Declaring Validation Provider
-/// Using to handle validation user authentication state data.
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
 
 class ValidationProvider extends ChangeNotifier {
   String _errorName;

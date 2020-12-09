@@ -1,4 +1,7 @@
-part of 'widgets.dart';
+import 'package:comida/shared/color.dart';
+import 'package:comida/shared/font.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DarkTextField extends StatelessWidget {
   final String labelText;

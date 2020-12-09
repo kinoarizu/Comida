@@ -1,4 +1,21 @@
-part of 'package:comida/ui/screens/screens.dart';
+import 'package:comida/model/auth.dart';
+import 'package:comida/network/repositories/auth_repository.dart';
+import 'package:comida/network/services/social_auth_service.dart';
+import 'package:comida/shared/color.dart';
+import 'package:comida/shared/font.dart';
+import 'package:comida/shared/size.dart';
+import 'package:comida/states/bloc/page_bloc.dart';
+import 'package:comida/states/provider/validation_provider.dart';
+import 'package:comida/ui/widgets/base_button.dart';
+import 'package:comida/ui/widgets/dark_text_field.dart';
+import 'package:comida/ui/widgets/validation_bar.dart';
+import 'package:comida/utils/response_util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -311,7 +328,7 @@ class _SignInScreenState extends State<SignInScreen> {
     ResponseUtil response = await AuthRepository.signIn(auth);
 
     if (response.statusCode == 200) {
-      context.bloc<PageBloc>().add(GoToExploreScreen());
+      context.bloc<PageBloc>().add(GoToMainScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
     } else if (response.statusCode == 450) {
       setState(() {
@@ -342,7 +359,7 @@ class _SignInScreenState extends State<SignInScreen> {
     ResponseUtil response = await SocialAuthService.signInGoogle();
 
     if (response.statusCode == 200) {
-      context.bloc<PageBloc>().add(GoToExploreScreen());
+      context.bloc<PageBloc>().add(GoToMainScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
     } else if (response.statusCode == 422) {
       setState(() {
@@ -373,7 +390,7 @@ class _SignInScreenState extends State<SignInScreen> {
     ResponseUtil response = await SocialAuthService.signInFacebook();
 
     if (response.statusCode == 200) {
-      context.bloc<PageBloc>().add(GoToExploreScreen());
+      context.bloc<PageBloc>().add(GoToMainScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
     } else if (response.statusCode == 422) {
       setState(() {

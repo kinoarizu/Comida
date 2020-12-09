@@ -1,8 +1,9 @@
+import 'package:comida/shared/theme.dart';
 import 'package:comida/states/bloc/page_bloc.dart';
 import 'package:comida/states/bloc/user_bloc.dart';
-import 'package:comida/states/provider/provider.dart';
-import 'package:comida/shared/shared.dart';
-import 'package:comida/ui/screens/screens.dart';
+import 'package:comida/states/provider/navigation_provider.dart';
+import 'package:comida/states/provider/validation_provider.dart';
+import 'package:comida/ui/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ValidationProvider()),
+          ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ],
         child: GetMaterialApp(
           title: "Comida - Fast Food Market",

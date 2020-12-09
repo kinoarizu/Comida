@@ -1,4 +1,10 @@
-part of 'services.dart';
+import 'package:comida/network/repositories/auth_repository.dart';
+import 'package:comida/utils/response_util.dart';
+import 'package:comida/utils/storage_util.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:comida/model/auth.dart' as model;
 
 class SocialAuthService {
   static FirebaseAuth _auth = FirebaseAuth.instance;

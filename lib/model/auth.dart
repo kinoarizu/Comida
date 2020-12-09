@@ -1,5 +1,3 @@
-part of 'model.dart';
-
 /// Declaring Auth Model
 /// Using to passsing user auth data when authentication like sign up, sign in, and verification.
 

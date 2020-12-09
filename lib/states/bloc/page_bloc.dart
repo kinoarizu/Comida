@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:comida/model/model.dart';
+import 'package:comida/model/auth.dart';
 import 'package:equatable/equatable.dart';
 
 part 'page_event.dart';
@@ -38,8 +38,8 @@ class PageBloc extends Bloc<PageEvent, PageState> {
     else if (event is GoToResetPasswordScreen) {
       yield OnResetPasswordScreen();
     }
-    else if (event is GoToExploreScreen) {
-      yield OnExploreScreen();
+    else if (event is GoToMainScreen) {
+      yield OnMainScreen();
     }
   }
 }

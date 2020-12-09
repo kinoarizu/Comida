@@ -1,4 +1,5 @@
-part of 'shared.dart';
+import 'package:comida/shared/color.dart';
+import 'package:flutter/material.dart';
 
 /// Set material design theme data of this application.
 

@@ -1,4 +1,19 @@
-part of 'package:comida/ui/screens/screens.dart';
+import 'package:comida/model/auth.dart';
+import 'package:comida/network/repositories/auth_repository.dart';
+import 'package:comida/shared/color.dart';
+import 'package:comida/shared/font.dart';
+import 'package:comida/shared/size.dart';
+import 'package:comida/states/bloc/page_bloc.dart';
+import 'package:comida/states/provider/validation_provider.dart';
+import 'package:comida/ui/widgets/base_button.dart';
+import 'package:comida/ui/widgets/validation_bar.dart';
+import 'package:comida/utils/response_util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   final Auth auth;
@@ -171,7 +186,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     );
 
     if (response.statusCode == 200) {
-      context.bloc<PageBloc>().add(GoToExploreScreen());
+      context.bloc<PageBloc>().add(GoToMainScreen());
       Provider.of<ValidationProvider>(context, listen: false).resetChange();
       Provider.of<ValidationProvider>(context, listen: false).resetChangeNumberAddress();
       Provider.of<ValidationProvider>(context, listen: false).resetVerificationCode();

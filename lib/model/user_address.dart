@@ -1,4 +1,4 @@
-part of 'model.dart';
+import 'package:equatable/equatable.dart';
 
 class UserAddress extends Equatable {
   final String type;

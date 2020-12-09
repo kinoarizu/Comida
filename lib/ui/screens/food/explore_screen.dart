@@ -1,4 +1,13 @@
-part of 'package:comida/ui/screens/screens.dart';
+import 'package:comida/network/repositories/auth_repository.dart';
+import 'package:comida/network/services/social_auth_service.dart';
+import 'package:comida/shared/color.dart';
+import 'package:comida/states/bloc/page_bloc.dart';
+import 'package:comida/states/bloc/user_bloc.dart';
+import 'package:comida/utils/storage_util.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ExploreScreen extends StatelessWidget {
   @override

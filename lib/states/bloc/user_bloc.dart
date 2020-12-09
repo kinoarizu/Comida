@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:comida/model/model.dart';
-import 'package:comida/network/repositories/repositories.dart';
+import 'package:comida/model/user.dart';
+import 'package:comida/network/repositories/user_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 

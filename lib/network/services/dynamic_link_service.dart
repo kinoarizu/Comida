@@ -1,4 +1,8 @@
-part of 'services.dart';
+import 'package:comida/states/bloc/page_bloc.dart';
+import 'package:comida/utils/storage_util.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DynamicLinkService {
   static Future<void> retrieveDynamicLink(BuildContext context) async {

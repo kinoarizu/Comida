@@ -1,4 +1,7 @@
-part of 'widgets.dart';
+import 'package:comida/shared/color.dart';
+import 'package:comida/shared/font.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flutter/material.dart';
 
 showValidationBar(BuildContext context, {String message, Color color, IconData icon}) {
   return Flushbar(

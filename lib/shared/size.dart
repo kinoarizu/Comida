@@ -1,4 +1,4 @@
-part of 'shared.dart';
+import 'package:flutter/material.dart';
 
 /// Set default size and get device dimension of this application.
 

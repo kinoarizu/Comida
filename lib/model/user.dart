@@ -1,4 +1,6 @@
-part of 'model.dart';
+import 'package:comida/model/user_address.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 class User extends Equatable {
   final int id;

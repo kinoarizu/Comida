@@ -1,4 +1,5 @@
-part of 'widgets.dart';
+import 'package:comida/shared/color.dart';
+import 'package:flutter/material.dart';
 
 class BaseButton extends StatelessWidget {
   @required final double width;

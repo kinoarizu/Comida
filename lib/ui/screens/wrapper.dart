@@ -1,4 +1,16 @@
-part of 'screens.dart';
+import 'package:comida/network/services/dynamic_link_service.dart';
+import 'package:comida/states/bloc/page_bloc.dart';
+import 'package:comida/ui/screens/auth/check_email_screen.dart';
+import 'package:comida/ui/screens/auth/email_verification_screen.dart';
+import 'package:comida/ui/screens/auth/number_address_screen.dart';
+import 'package:comida/ui/screens/auth/reset_password_screen.dart';
+import 'package:comida/ui/screens/auth/sign_in_screen.dart';
+import 'package:comida/ui/screens/auth/sign_up_screen.dart';
+import 'package:comida/ui/screens/static/location_permission_screen.dart';
+import 'package:comida/ui/screens/static/main_screen.dart';
+import 'package:comida/ui/screens/static/splash_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Handling page routing using bloc state management architecture.
 
@@ -43,8 +55,8 @@ class _WrapperState extends State<Wrapper> {
         : (pageState is OnResetPasswordScreen)
         ? ResetPasswordScreen()
 
-        : (pageState is OnExploreScreen)
-        ? ExploreScreen()
+        : (pageState is OnMainScreen)
+        ? MainScreen()
 
         : Container()
         
