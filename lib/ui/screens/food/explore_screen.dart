@@ -282,7 +282,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                         discount: 10,
                         normalPrice: 14.99,
                         discountPrice: 10.99,
-                        image: "assets/image/image.png",
+                        image: "assets/image/picture.png",
                         onTap: () {},
                       ),
                     );
