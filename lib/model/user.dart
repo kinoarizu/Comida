@@ -1,8 +1,7 @@
 import 'package:comida/model/user_address.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class User extends Equatable {
+class User {
   final int id;
   final String name;
   final String email;
@@ -16,15 +15,6 @@ class User extends Equatable {
     @required this.phoneNumber,
     @required this.addresses,
   });
-
-  @override
-  List<Object> get props => [
-    id,
-    name,
-    email,
-    phoneNumber,
-    addresses,
-  ];
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json['id'],

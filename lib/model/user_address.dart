@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-class UserAddress extends Equatable {
+class UserAddress {
   final String type;
   final String address;
 
@@ -8,12 +6,6 @@ class UserAddress extends Equatable {
     this.type,
     this.address,
   });
-
-  @override
-  List<Object> get props => [
-    type,
-    address,
-  ];
 
   factory UserAddress.fromJson(Map<String, dynamic> json) => UserAddress(
     type: json['type'],

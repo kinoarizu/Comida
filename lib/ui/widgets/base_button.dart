@@ -25,6 +25,7 @@ class BaseButton extends StatelessWidget {
       height: height,
       margin: margin,
       child: RaisedButton(
+        elevation: 0,
         onPressed: onPressed,
         color: color,
         disabledColor: greyColor,

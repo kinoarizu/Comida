@@ -96,7 +96,6 @@ class BottomNavbar extends StatelessWidget {
             label,
             style: mediumBaseFont.copyWith(
               fontSize: 12,
-              color: whiteColor,
             ),
           ),
         ],

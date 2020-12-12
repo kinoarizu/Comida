@@ -12,8 +12,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
-/// Calling run app method when app launched.
-/// Set force app orientation into potrait up.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
@@ -24,8 +22,6 @@ void main() async {
 }
 
 /// Declaring root class of this project.
-/// Register blocs and and provider so that it can handle state globally.
-/// Set theme and manifest of this app using material design.
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

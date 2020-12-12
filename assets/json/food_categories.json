@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Burger",
+    "image": "assets/image/burger_category.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Pizza",
+    "image": "assets/image/pizza_category.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Steak",
+    "image": "assets/image/steak_category.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Pasta",
+    "image": "assets/image/pasta_category.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Pancake",
+    "image": "assets/image/pancake_category.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Lasagna",
+    "image": "assets/image/lasagna_category.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Sandwich",
+    "image": "assets/image/sandwich_category.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Hot Dog",
+    "image": "assets/image/hotdog_category.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Seafood",
+    "image": "assets/image/seafood_category.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Rissoto",
+    "image": "assets/image/rissoto_category.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Chicken",
+    "image": "assets/image/chicken_category.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Drink",
+    "image": "assets/image/drink_category.jpg"
+  }
+]
