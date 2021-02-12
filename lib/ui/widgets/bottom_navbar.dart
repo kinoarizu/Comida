@@ -14,7 +14,7 @@ class BottomNavbar extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         width: deviceWidth(context),
-        height: 64,
+        height: 60,
         padding: EdgeInsets.symmetric(
           horizontal: 24,
         ),
@@ -86,8 +86,8 @@ class BottomNavbar extends StatelessWidget {
         children: [
           Image.asset(
             icon,
-            width: 30,
-            height: 30,
+            width: 26,
+            height: 26,
           ),
           SizedBox(
             width: 4,
@@ -110,8 +110,8 @@ class BottomNavbar extends StatelessWidget {
         ),
         child: Image.asset(
           icon,
-          width: 30,
-          height: 30,
+          width: 26,
+          height: 26,
         ),
         onPressed: onTap,
       ),

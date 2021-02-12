@@ -62,3 +62,8 @@ class OnMainScreen extends PageState {
   @override
   List<Object> get props => [];
 }
+
+class OnMapsScreen extends PageState {
+  @override
+  List<Object> get props => [];
+}

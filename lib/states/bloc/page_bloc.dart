@@ -41,5 +41,8 @@ class PageBloc extends Bloc<PageEvent, PageState> {
     else if (event is GoToMainScreen) {
       yield OnMainScreen();
     }
+    else if (event is GoToMapsScreen) {
+      yield OnMapsScreen();
+    }
   }
 }

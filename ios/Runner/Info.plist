@@ -26,7 +26,11 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
+	<key>AccessKeyId</key>
+	<string>YOUR_ACCESS_KEY_ID</string>
+	<key>SEc6GCUsEgT2EV-vU8CBEw</key>
+	<string>YOUR_ACCESS_KEY_SECRET</string>
+	<key>QTWlYFLbO-bl2uUIO0r84vFCHhiSMvc4pdfKRfeAvX0OwPYJrrF_QB9x8s2w41UCHy3O5_bnRJ0-oIWesEhy4Q</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

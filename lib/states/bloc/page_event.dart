@@ -62,3 +62,8 @@ class GoToMainScreen extends PageEvent {
   @override
   List<Object> get props => [];
 }
+
+class GoToMapsScreen extends PageEvent {
+  @override
+  List<Object> get props => [];
+}

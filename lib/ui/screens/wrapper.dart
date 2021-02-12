@@ -6,6 +6,7 @@ import 'package:comida/ui/screens/auth/number_address_screen.dart';
 import 'package:comida/ui/screens/auth/reset_password_screen.dart';
 import 'package:comida/ui/screens/auth/sign_in_screen.dart';
 import 'package:comida/ui/screens/auth/sign_up_screen.dart';
+import 'package:comida/ui/screens/food/maps_screen.dart';
 import 'package:comida/ui/screens/static/location_permission_screen.dart';
 import 'package:comida/ui/screens/static/main_screen.dart';
 import 'package:comida/ui/screens/static/splash_screen.dart';
@@ -57,6 +58,9 @@ class _WrapperState extends State<Wrapper> {
 
         : (pageState is OnMainScreen)
         ? MainScreen()
+
+        : (pageState is OnMapsScreen)
+        ? MapsScreen()
 
         : Container()
         
