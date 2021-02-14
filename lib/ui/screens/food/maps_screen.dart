@@ -104,7 +104,7 @@ class _MapsScreenState extends State<MapsScreen> {
                       ),
                     ),
                   ),
-                  /// SECTION: GOOGLE MAPS INFO
+                  /// SECTION: MAPS INFO
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
