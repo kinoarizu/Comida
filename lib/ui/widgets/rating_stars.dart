@@ -19,7 +19,7 @@ class RatingStars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int n = (voteAverage / 2).round();
+    int n = voteAverage.floor();
 
     List<Widget> widgets = List.generate(5, (index) => Icon(
       index < n ? Icons.star : Icons.star_border,

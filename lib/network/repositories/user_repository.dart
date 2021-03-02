@@ -16,6 +16,8 @@ class UserRepository {
         validateStatus: (status) { return status <= 500; },
         headers: {
           'Authorization': 'Bearer $token',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         },
       ),
     );

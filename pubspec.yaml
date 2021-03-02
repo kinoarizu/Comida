@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cached_network_image: ^2.5.0
   cupertino_icons: ^1.0.0
   dio: ^3.0.10
   email_validator: ^1.0.6
@@ -42,6 +43,7 @@ dependencies:
   mask_text_input_formatter: ^1.1.0
   pin_code_fields: ^6.0.1
   provider: ^4.3.2+2
+  shimmer: ^1.1.2
   url_launcher: ^5.7.8
 
 dev_dependencies:

@@ -258,7 +258,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 setState(() {
                                   isFacebookClicked = true;
                                 });
-                                onFacebookSignInPressed();
+                                onFacebookLoginPressed();
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -386,8 +386,8 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  void onFacebookSignInPressed() async {
-    ResponseUtil response = await SocialAuthService.signInFacebook();
+  void onFacebookLoginPressed() async {
+    ResponseUtil response = await SocialAuthService.loginFacebook();
 
     if (response.statusCode == 200) {
       context.bloc<PageBloc>().add(GoToMainScreen());

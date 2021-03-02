@@ -1,10 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comida/model/food_category.dart';
+import 'package:comida/model/food_type.dart';
 import 'package:comida/network/repositories/food_category_repository.dart';
+import 'package:comida/network/repositories/food_type_repository.dart';
 import 'package:comida/shared/color.dart';
 import 'package:comida/shared/font.dart';
 import 'package:comida/states/bloc/page_bloc.dart';
 import 'package:comida/states/bloc/user_bloc.dart';
 import 'package:comida/ui/widgets/base_button.dart';
+import 'package:comida/ui/widgets/image_placeholder.dart';
 import 'package:comida/ui/widgets/rating_stars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -212,26 +216,39 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ),
               SizedBox(
                 height: 120,
-                child: ListView.builder(
-                  itemCount: 3,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        left: 16,
-                        right: (index == 3 - 1) ? 16 : 0, 
-                      ),
-                      child: _buildPopularItemCard(
-                        name: "Grilled Chicken",
-                        restaurant: "KFC",
-                        rating: 7.8,
-                        image: "assets/image/image.png",
-                        normalPrice: 14.55,
-                        discountPrice: 10.35,
-                        onTap: () {},
-                      ),
-                    );
-                  },
+                child: FutureBuilder(
+                  future: FoodTypeRepository.getFoodTypes(),
+                  builder: (context, snapshot) {
+                    List<FoodType> foodTypes = snapshot.data;
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: foodTypes.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              left: 16,
+                              right: (index == foodTypes.length - 1) ? 16 : 0, 
+                            ),
+                            child: _buildPopularItemCard(
+                              name: foodTypes[index].name,
+                              restaurant: foodTypes[index].restaurant,
+                              image: foodTypes[index].image,
+                              rating: foodTypes[index].rating,
+                              normalPrice: foodTypes[index].price,
+                              discountPrice: foodTypes[index].price - (foodTypes[index].price * (30 / 100)),
+                              onTap: () {},
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return SpinKitDoubleBounce(
+                        color: whiteColor,
+                        size: 40,
+                      );
+                    }
+                  }
                 ),
               ),
             ],
@@ -373,14 +390,23 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return GestureDetector(
       child: Column(
         children: [
-          Container(
-            width: 88,
-            height: 65,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(image),
+          CachedNetworkImage(
+            imageUrl: image,
+            errorWidget: (context, url, error) => Icon(Icons.error),
+            placeholder: (context, url) => ImagePlaceholder(
+              width: 88,
+              height: 65,
+              size: 60,
+            ),
+            imageBuilder: (context, imageProvider) => Container(
+              width: 88,
+              height: 65,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: imageProvider,
+                ),
               ),
             ),
           ),
@@ -425,18 +451,25 @@ class _ExploreScreenState extends State<ExploreScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              width: 93,
-              height: 100,
-              margin: EdgeInsets.only(
-                right: 16,
+            CachedNetworkImage(
+              imageUrl: image,
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              placeholder: (context, url) => ImagePlaceholder(
+                width: 93,
+                height: 100,
+                size: 80,
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),  
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(
-                    image,
+              imageBuilder: (context, imageProvider) => Container(
+                width: 93,
+                height: 100,
+                margin: EdgeInsets.only(
+                  right: 16,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: imageProvider,
                   ),
                 ),
               ),
@@ -444,10 +477,16 @@ class _ExploreScreenState extends State<ExploreScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  style: mediumBaseFont.copyWith(
-                    fontSize: 16,
+                Container(
+                  width: 145,
+                  child: Text(
+                    name,
+                    overflow: TextOverflow.fade,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: mediumBaseFont.copyWith(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
                 Text(
@@ -482,7 +521,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       width: 8,
                     ),
                     Text(
-                      "\$$discountPrice",
+                      "\$${discountPrice.toStringAsFixed(2)}",
                       style: mediumBaseFont.copyWith(
                         fontSize: 14.5,
                       ),

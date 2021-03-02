@@ -45,7 +45,8 @@ class SocialAuthService {
     final UserCredential authResult = await _auth.signInWithCredential(credential);
     final User user = authResult.user;
 
-    StorageUtil.writeStorage('token', googleSignInAuthentication.accessToken);
+    StorageUtil.writeStorage('token', response.data);
+    StorageUtil.writeStorage('google_access_token', googleSignInAuthentication.accessToken);
     StorageUtil.writeStorage('status', 'google');
 
     return ResponseUtil.resultResponse(
@@ -68,7 +69,7 @@ class SocialAuthService {
     );
   }
 
-  static Future<ResponseUtil> signInFacebook() async {
+  static Future<ResponseUtil> loginFacebook() async {
     try {
       final AccessToken accessToken = await FacebookAuth.instance.login(
         loginBehavior: LoginBehavior.NATIVE_WITH_FALLBACK,
@@ -95,7 +96,8 @@ class SocialAuthService {
       final UserCredential authResult = await _auth.signInWithCredential(credential);
       final User user = authResult.user;
 
-      StorageUtil.writeStorage('token', accessToken.token);
+      StorageUtil.writeStorage('token', response.data);
+      StorageUtil.writeStorage('facebook_access_token', accessToken.token);
       StorageUtil.writeStorage('status', 'facebook');
 
       return ResponseUtil.resultResponse(
@@ -111,7 +113,7 @@ class SocialAuthService {
     }
   }
 
-  static Future<ResponseUtil> signOutFacebook() async {
+  static Future<ResponseUtil> logoutFacebook() async {
     await FacebookAuth.instance.logOut();
     await FirebaseAuth.instance.signOut();
 
